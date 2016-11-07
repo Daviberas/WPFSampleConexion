@@ -12,11 +12,17 @@ namespace WPFSampleEntities
         //Atributos
         public int Id { get; set; }
         [Required]
+        [Display (Name = "Nombre")]
         public String Nombre { get; set; }
         [Required]
+        [Display(Name = "Apellido")]
         public String Apellidos { get; set; }
+        [Display(Name = "Fecha de nacimiento")]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode =true)]
         public DateTime FechaNac { get; set; }
+        [Display(Name = "Dirección")]
         public String Direccion { get; set; }
+        [Display(Name = "Teléfono")]
         public String Telefono { get; set; }
 
         //Constructores

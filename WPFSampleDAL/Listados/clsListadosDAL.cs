@@ -49,9 +49,9 @@ namespace WPFSampleDAL
                 }
                 miLector.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
             finally
             {
