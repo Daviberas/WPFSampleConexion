@@ -52,5 +52,41 @@ namespace WPFSampleDAL.Manejadora
                 miConexion.closeConnection(ref conexion);
             }
         }
+
+        public int actualizarPersonaDAL(clsPersona persona)
+        {
+            int resultado = 0;
+
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand miComando = new SqlCommand();
+
+            //Añadimos los datos al comando
+            miComando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = persona.Id;
+            miComando.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = persona.Nombre;
+            miComando.Parameters.Add("@apellidos", System.Data.SqlDbType.VarChar).Value = persona.Apellidos;
+            miComando.Parameters.Add("@fechaNac", System.Data.SqlDbType.Date).Value = persona.FechaNac;
+            miComando.Parameters.Add("@telefono", System.Data.SqlDbType.VarChar).Value = persona.Telefono;
+            miComando.Parameters.Add("@direccion", System.Data.SqlDbType.VarChar).Value = persona.Direccion;
+
+            try
+            {
+                conexion = miConexion.getConnection();
+
+                miComando.CommandText = "update PERSONAS set nombre = @nombre, apellidos = @apellidos, fechaNac = @fechaNac, telefono = @telefono, direccion = @direccion where IDPersona = @id";
+                miComando.Connection = conexion;
+                resultado = miComando.ExecuteNonQuery();
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexion.Close();
+                miConexion.closeConnection(ref conexion);
+            }
+        }
     }
 }

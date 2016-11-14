@@ -44,5 +44,32 @@ namespace WPFSampleUI.Controllers
                 }
             }
         }
+
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        [HttpPost, ActionName("Edit")]
+        public ActionResult EditConfirmed(clsPersona persona)
+        {
+            int i;
+            clsListadosBL lista = new clsListadosBL();
+            if (!ModelState.IsValid)
+                return View(persona);
+            else
+            {
+                try
+                {
+                    i = new clsManejadoraPersonaBL().actualizarPersonaBL(persona);
+                    return View("Index", lista.getListadoPersonasBL());
+                }
+                catch (Exception)
+                {
+                    // return View("paginaError");
+                    throw;
+                }
+            }
+        }
     }
 }
