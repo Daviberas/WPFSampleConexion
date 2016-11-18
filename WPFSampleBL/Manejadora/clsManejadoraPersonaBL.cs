@@ -11,6 +11,13 @@ namespace WPFSampleBL.Manejadora
 {
     public class clsManejadoraPersonaBL
     {
+        public clsPersona obtenerPersonaBL(int id)
+        {
+            clsPersona i = new clsManejadoraPersonaDAL().obtenerPersonaDAL(id);
+
+            return i;
+        }
+
         public int insertarPersonaBL(clsPersona persona)
         {
             int i = new clsManejadoraPersonaDAL().insertarPersonaDAL(persona);
@@ -21,6 +28,13 @@ namespace WPFSampleBL.Manejadora
         public int actualizarPersonaBL(clsPersona persona)
         {
             int i = new clsManejadoraPersonaDAL().actualizarPersonaDAL(persona);
+
+            return i;
+        }
+
+        public int borrarPersonaBL(clsPersona persona)
+        {
+            int i = new clsManejadoraPersonaDAL().borrarPersonaDAL(persona);
 
             return i;
         }

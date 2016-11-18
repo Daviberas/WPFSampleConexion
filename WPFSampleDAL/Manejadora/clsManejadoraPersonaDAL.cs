@@ -18,6 +18,47 @@ namespace WPFSampleDAL.Manejadora
             miConexion = new clsMyConnection();
         }
 
+        public clsPersona obtenerPersonaDAL(int id)
+        {
+            clsPersona resultado = new clsPersona();
+
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand miComando = new SqlCommand();
+            SqlDataReader miLector;
+
+            //Añadimos los datos al comando
+            miComando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+
+            try
+            {
+                conexion = miConexion.getConnection();
+
+                miComando.CommandText = "select nombre, apellidos, fechaNac, telefono, direccion from PERSONAS where IDPersona = @id";
+                miComando.Connection = conexion;
+                miLector = miComando.ExecuteReader();
+
+                miLector.Read();
+
+                resultado.Id = id;
+                resultado.Nombre = (String)miLector["nombre"];
+                resultado.Apellidos = (String)miLector["apellidos"];
+                resultado.FechaNac = (DateTime)miLector["fechaNac"];
+                resultado.Direccion = (String)miLector["direccion"];
+                resultado.Telefono = (String)miLector["telefono"];
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexion.Close();
+                miConexion.closeConnection(ref conexion);
+            }
+        }
+
         public int insertarPersonaDAL(clsPersona persona)
         {
             int resultado = 0;
@@ -51,6 +92,38 @@ namespace WPFSampleDAL.Manejadora
                 conexion.Close();
                 miConexion.closeConnection(ref conexion);
             }
+        }
+
+        public int borrarPersonaDAL(clsPersona persona)
+        {
+            int resultado = 0;
+
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand miComando = new SqlCommand();
+
+            //Añadimos los datos al comando
+            miComando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = persona.Id;
+
+            try
+            {
+                conexion = miConexion.getConnection();
+
+                miComando.CommandText = "delete from PERSONAS where IDPersona = @id";
+                miComando.Connection = conexion;
+                resultado = miComando.ExecuteNonQuery();
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexion.Close();
+                miConexion.closeConnection(ref conexion);
+            }
+        
         }
 
         public int actualizarPersonaDAL(clsPersona persona)

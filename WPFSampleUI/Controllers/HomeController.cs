@@ -23,7 +23,7 @@ namespace WPFSampleUI.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult Create(clsPersona persona)
         {
@@ -66,9 +66,59 @@ namespace WPFSampleUI.Controllers
                 }
                 catch (Exception)
                 {
-                    // return View("paginaError");
-                    throw;
+                    return View("paginaError");
                 }
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            clsPersona i;
+
+            try
+            {
+                i = new clsManejadoraPersonaBL().obtenerPersonaBL(id);
+                return View(i);
+            }
+            catch (Exception)
+            {
+                return View("paginaError");
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            int i;
+            clsListadosBL lista = new clsListadosBL();
+            clsPersona persona;
+
+            try
+            {
+                persona = new clsManejadoraPersonaBL().obtenerPersonaBL(id);
+
+                i = new clsManejadoraPersonaBL().borrarPersonaBL(persona);
+                return View("Index", lista.getListadoPersonasBL());
+            }
+            catch (Exception)
+            {
+                return View("paginaError");
+            }
+
+        }
+
+        public ActionResult Details(int id)
+        {
+            clsPersona i;
+
+            try
+            {
+                i = new clsManejadoraPersonaBL().obtenerPersonaBL(id);
+                return View(i);
+            }
+            catch (Exception)
+            {
+                return View("paginaError");
             }
         }
     }
