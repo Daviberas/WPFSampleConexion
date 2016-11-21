@@ -11,7 +11,11 @@ namespace WPFSampleUI.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+        /// <summary>
+        /// Muestra la vista de la página principal, con un listado de personas.
+        /// </summary>
+        /// <returns>Una vista con un listado de personas.</returns>
+        
         public ActionResult Index()
         {
             clsListadosBL lista = new clsListadosBL();
@@ -19,10 +23,21 @@ namespace WPFSampleUI.Controllers
             return View(lista.getListadoPersonasBL());
         }
 
+        /// <summary>
+        /// Muestra la vista de la página de inserción de personas.
+        /// </summary>
+        /// <returns>Una vista con un formulario.</returns>
+
         public ActionResult Create()
         {
             return View();
         }
+
+        /// <summary>
+        /// Muestra la vista de la página principal, con un listado de personas con la nueva persona añadida.
+        /// </summary>
+        /// <param name="persona">Tipo persona, recibido de la propia vista Create.</param>
+        /// <returns>La vista principal con el listado de personas, si se realiza la inserción correctamente, en caso de error, una vista de una pagina de error.</returns>
 
         [HttpPost]
         public ActionResult Create(clsPersona persona)
@@ -44,6 +59,12 @@ namespace WPFSampleUI.Controllers
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         public ActionResult Edit(int id)
         {
@@ -91,13 +112,11 @@ namespace WPFSampleUI.Controllers
         {
             int i;
             clsListadosBL lista = new clsListadosBL();
-            clsPersona persona;
 
             try
             {
-                persona = new clsManejadoraPersonaBL().obtenerPersonaBL(id);
 
-                i = new clsManejadoraPersonaBL().borrarPersonaBL(persona);
+                i = new clsManejadoraPersonaBL().borrarPersonaBL(id);
                 return View("Index", lista.getListadoPersonasBL());
             }
             catch (Exception)
