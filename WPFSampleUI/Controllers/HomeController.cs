@@ -51,7 +51,7 @@ namespace WPFSampleUI.Controllers
                 try
                 {
                     i = new clsManejadoraPersonaBL().insertarPersonaBL(persona);
-                    return View("Index", lista.getListadoPersonasBL());
+                    return RedirectToAction("Index");
                 }
                 catch (Exception)
                 {
@@ -83,7 +83,7 @@ namespace WPFSampleUI.Controllers
                 try
                 {
                     i = new clsManejadoraPersonaBL().actualizarPersonaBL(persona);
-                    return View("Index", lista.getListadoPersonasBL());
+                    return RedirectToAction("Index");
                 }
                 catch (Exception)
                 {
@@ -117,7 +117,7 @@ namespace WPFSampleUI.Controllers
             {
 
                 i = new clsManejadoraPersonaBL().borrarPersonaBL(id);
-                return View("Index", lista.getListadoPersonasBL());
+                return RedirectToAction("Index");
             }
             catch (Exception)
             {

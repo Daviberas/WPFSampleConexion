@@ -33,12 +33,12 @@ namespace WPFSample_DAL
 
         public clsMyConnection()
         {
-            this.dataBase = "WPFSample";
+            this.dataBase = "UWPSampleDavid";
             //El primer usuario es de de la base de datos del instituto, el segundo la de casa
             this.user = "prueba";
             //this.user = "pruebaResident";
-            this.pass = "123";
-            this.host = " 192.168.0.161";
+            this.pass = "1234abc.";
+            this.host = "uwpsampledavid.database.windows.net";
 
         }
         //Con parámetros por si quisiera cambiar las conexiones
